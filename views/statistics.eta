@@ -1,0 +1,17 @@
+<% layout("./layouts/layout.eta") %>
+<h1>My statistic:</h1>
+
+<table class="table">
+<tr><td>The number of answers:</td><td><%=it.myTotalAnswers.count %></td></tr>
+<tr><td>The number of correct answers:</td><td><%= it.myCorrectAnswers.count %></td></tr>
+<tr><td>The number of answers on own questions:</td><td><%= it.answersOnMyOwnQuestions.count %></td></tr>
+</table>
+
+<h1>Top five users:</h1>
+
+<table class="table">
+<tr><th>User</th><th>Answers</th></tr>
+<% it.topFiveUsers.forEach(user => { %>
+<tr><td><%= user.email %></td><td><%= user.count %></td></tr>
+<% }) %>
+</table>

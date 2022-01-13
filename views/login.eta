@@ -1,0 +1,16 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Login form</h1>
+
+<form method="POST" action="/auth/login">
+  <fieldset>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input class="form-control" type="email" id="email" name="email" />
+      <label for="password">Password:</label>
+      <input class="form-control" type="password" id="password" name="password" />
+    </div>
+    <input type="submit" value="Login" class="btn btn-primary" />
+  </fieldset>
+</form>
+<a href="/auth/register">Not yet registered? Register here.</a>
