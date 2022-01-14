@@ -4,8 +4,8 @@
 
 <% if (it.questions && it.questions.length > 0 ) { %>
 <ul>
-<% it.questions.forEach(question =>{%>
-<li><a href="/questions/<%= question.id %>"><%= question.title %></a></li>
+<% it.questions.forEach(que =>{%>
+<li><a href="/questions/<%= que.id %>"><%= que.title %></a></li>
 <%});%>
 </ul>
 <% } else {%>
@@ -14,10 +14,10 @@
 
 <h2>Add a question!</h2>
 
-<% if (it.validationErrors) {%>
+<% if (it.question && it.question.validationErrors) {%>
 <ul>
-    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
-        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+    <% Object.keys(it.question.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.question.validationErrors[attribute]).forEach((err) => { %>
             <li><%= err %></li>
         <% }); %>
     <% }); %>
@@ -28,9 +28,9 @@
     <fieldset>
         <div class="form-group">
             <label for="title">Title:</label>
-            <input class="form-control" type="text" id="title" name="title" value="<%= it.title ? it.title : "" %>"/>
+            <input class="form-control" type="text" id="title" name="title" value="<%= it.question && it.question.title ? it.question.title : "" %>"/>
             <label for="question_text">Question:</label>
-            <textarea class="form-control" id="question_text" name="question_text"><%= it.question_text ? it.question_text : "" %></textarea><br/>
+            <textarea class="form-control" id="question_text" name="question_text"><%= it.question && it.question.question_text ? it.question.question_text : "" %></textarea><br/>
             <input type="submit" value="Add" class="btn btn-primary" />
         </div>
     </fieldset>

@@ -40,15 +40,33 @@ CREATE TABLE question_answers (
 CREATE UNIQUE INDEX ON users((lower(email)));
 ```
 
-2. Run locally:
+2. Run locally from the application root:
 
-```deno run --allow-net --allow-read --unstable run-locally.js```
+```deno run --allow-net --allow-read --allow-env --unstable run-locally.js```
 
 ## Testing
 
-Run:
+1. Set the database credentials in the database/database.js file as show in the example below
 
 ```
+const CONCURRENT_CONNECTIONS = 2;
+let connectionPool;
+if (Deno.env.get("DATABASE_URL")) {
+  connectionPool = new Pool(Deno.env.get("DATABASE_URL"), CONCURRENT_CONNECTIONS);
+} else {
+  connectionPool = new Pool({
+    hostname: "hostname",
+  database: "databasename",
+  user: "userhere",
+  password: "yourpasswordhere",
+  port: 5432,
+  }, CONCURRENT_CONNECTIONS);
+}
+```
+
+2. Run locally from the application root:
+
+```deno test --allow-read --allow-net --allow-env --unstable```
 
 ## API
 
@@ -65,4 +83,6 @@ example of request:
 }
 ```
 
-##
+## Link to the application
+
+https://my-second-project-quiz.herokuapp.com/

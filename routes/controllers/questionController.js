@@ -32,7 +32,8 @@ const addQuestion = async ({ request, response, user, render }) => {
 };
 
 const listQuestions = async ({ render, user }) => {
-
+const q = await questionService.listQuestions(user.id);
+console.log(q)
     render("questions.eta", { questions: await questionService.listQuestions(user.id), user });
 }
 
