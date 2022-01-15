@@ -24,7 +24,6 @@ const addAnswer = async ({ request, response, params, render, user }) => {
         const [passes, errors] = await validasaur.validate(answerData, answerValidationRules);
 
         if (!passes) {
-            console.log(errors);
             answerData.validationErrors = errors;
             render ("question.eta", { question: await questionService.showTheQuestion(params.id),
                 answers: answerData, user})

@@ -17,8 +17,6 @@ const processLogin = async({ request, response, state, render }) => {
     const user = userFromDatabase[0];
     const passwordMatches = await bcrypt.compare(params.get("password"), user.password,);
 
-    console.log(user)
-    
     if (!passwordMatches) {
         render("login.eta", { message: "incorrect username or password" });
         return;

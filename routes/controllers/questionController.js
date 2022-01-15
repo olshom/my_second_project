@@ -22,7 +22,6 @@ const addQuestion = async ({ request, response, user, render }) => {
 
     const [passes, errors] = await validasaur.validate(question, questionValidationRules,);
     if (!passes) {
-        console.log(errors);
         question.validationErrors = errors;
         render("questions.eta", { question, user })
     } else {
@@ -32,8 +31,6 @@ const addQuestion = async ({ request, response, user, render }) => {
 };
 
 const listQuestions = async ({ render, user }) => {
-const q = await questionService.listQuestions(user.id);
-console.log(q)
     render("questions.eta", { questions: await questionService.listQuestions(user.id), user });
 }
 

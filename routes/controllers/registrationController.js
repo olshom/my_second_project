@@ -23,7 +23,6 @@ const registerUser = async ({ request, response, render }) => {
     const [passes, errors] = await validasaur.validate(userData, regValidationRules);
 
     if (!passes) {
-        console.log(errors)
         userData.validationErrors = errors;
         render("registration.eta", userData)
     } else {

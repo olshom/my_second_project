@@ -6,7 +6,9 @@ The application is a quiz game, where the user can answer multiple choice questi
 
 ## How to use
 
-1. Create sql database with tables:
+1. Install Deno https://deno.land/manual/getting_started/installation
+
+2. Create a PostgreSQL database with the following tables:
 
 ```
 CREATE TABLE users (
@@ -40,9 +42,11 @@ CREATE TABLE question_answers (
 CREATE UNIQUE INDEX ON users((lower(email)));
 ```
 
-2. Run locally from the application root:
+3. Run locally from the application root:
 
 ```deno run --allow-net --allow-read --allow-env --unstable run-locally.js```
+
+4. Open http://localhost:7777 in brower of your choice
 
 ## Testing
 
