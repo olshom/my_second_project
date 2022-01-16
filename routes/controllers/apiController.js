@@ -5,6 +5,9 @@ import * as answerService from "../../services/answerService.js";
 const getRandomQuestion = async ({ response }) => {
     const allQuestionsId = await quizService.getAllQuestionId();
 
+    if (allQuestionsId.length === 0) {
+        response.body = {};
+    } else {
     const random = allQuestionsId[Math.floor(Math.random()*allQuestionsId.length)];
 
     const question = await questionService.showTheQuestion(random.id);
@@ -25,9 +28,8 @@ const getRandomQuestion = async ({ response }) => {
             questionText: question.question_text,
             answerOptions
         };
-    } else {
-        response.body = {};
-    };
+    }
+}
 };
 
 const handleAnswer = async({ request, response }) => {
@@ -36,8 +38,11 @@ const handleAnswer = async({ request, response }) => {
     const document = await body.value;
 
     const isCorrect = await quizService.isAnswerCorrect(document.optionId)
-
-    response.body = { correct: isCorrect.is_correct };
+    if (!isCorrect) {
+        response.body = {};
+    } else {
+        response.body = { correct: isCorrect.is_correct };
+    }
 };
 
 export { getRandomQuestion, handleAnswer }

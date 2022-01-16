@@ -9,7 +9,6 @@ if (Deno.env.get("DATABASE_URL")) {
 }
 
 
-
 const executeQuery = async (query, ...args) => {
   const response = {};
   let client;
