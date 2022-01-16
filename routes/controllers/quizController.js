@@ -21,9 +21,18 @@ const postAnswerOnQuestion = async({request, response, params, user, render}) =>
     await quizService.saveAnswerOnQuestion(user.id, params.id, params.optionId, isCorrect.is_correct);
 
     if (isCorrect.is_correct) {
-        render("correctAnswer.eta", { user })
+        response.redirect(`/quiz/${params.id}/correct`)
     } else {
-        render("incorrectAnswer.eta", { option: await quizService.findCorrectAnswer(params.id), user })
+        response.redirect(`/quiz/${params.id}/incorrect`)
     }
-}
-export { chooseRandomQuestion, showRandomQuestion, postAnswerOnQuestion }
+};
+
+const showResultIsCorrect = async ({render, user}) => {
+    render("correctAnswer.eta", {user});
+};
+
+const showResultIsIncorrect = async ({params, render, user}) => {
+    render("incorrectAnswer.eta", { option: await quizService.findCorrectAnswer(params.id), user })
+};
+
+export { chooseRandomQuestion, showRandomQuestion, postAnswerOnQuestion, showResultIsCorrect, showResultIsIncorrect }

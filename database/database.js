@@ -8,6 +8,8 @@ if (Deno.env.get("DATABASE_URL")) {
   connectionPool = new Pool({}, CONCURRENT_CONNECTIONS);
 }
 
+
+
 const executeQuery = async (query, ...args) => {
   const response = {};
   let client;
